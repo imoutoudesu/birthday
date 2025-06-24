@@ -9,6 +9,7 @@
       background: #cce7ff;
       margin: 0;
       padding: 20px;
+      overflow-x: hidden;
     }
 
     .letter {
@@ -37,8 +38,6 @@
 
     .particle {
       position: absolute;
-      width: 30px;
-      height: 30px;
       background-size: contain;
       background-repeat: no-repeat;
       animation: fall 10s linear infinite;
@@ -58,7 +57,7 @@
   </style>
 </head>
 <body>
-  <!-- 🌸❤️ Floating sakura + heart particles -->
+  <!-- 🌸❤️ Floating particles -->
   <div class="particles" id="particles"></div>
 
   <!-- 💌 Letter -->
@@ -92,42 +91,41 @@
     <source src="Yuika_Ren_-_Sukidakara_(musmore.com).mp3" type="audio/mpeg">
   </audio>
 
-  <!-- ✨ JS for particles and music unmute -->
   <script>
-    // Try to unmute and play
+    // Try to play the music
     const audio = document.getElementById("bgm");
     window.addEventListener("DOMContentLoaded", () => {
       audio.muted = false;
-      audio.play().catch(e => console.log("Autoplay blocked:", e));
+      audio.play().catch(err => console.log("Autoplay failed:", err));
     });
 
-    // 🎴 Sakura + heart particles
+    // 🎴 Sakura + heart particle animation
     const container = document.getElementById("particles");
+
     const images = [
-      "https://pngimg.com/uploads/heart/heart_PNG51337.png", // heart
-      "https://i.ibb.co/MRZMHqR/sakura.png" // sakura petal
+      "https://i.imgur.com/Lr5YVXt.png", // sakura
+      "https://i.imgur.com/zvWTUVu.png"  // heart
     ];
 
     function createParticle() {
       const particle = document.createElement("div");
-      particle.classList.add("particle");
+      particle.className = "particle";
 
-      // Randomly pick heart or sakura
+      // Pick image randomly
       const img = images[Math.floor(Math.random() * images.length)];
       particle.style.backgroundImage = `url('${img}')`;
 
-      // Random size & position
-      const size = 20 + Math.random() * 20;
-      particle.style.width = particle.style.height = `${size}px`;
+      const size = Math.random() * 20 + 20;
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
       particle.style.left = `${Math.random() * 100}vw`;
-      particle.style.animationDuration = `${6 + Math.random() * 4}s`;
-      container.appendChild(particle);
+      particle.style.animationDuration = `${6 + Math.random() * 5}s`;
 
-      // Remove after animation
-      setTimeout(() => particle.remove(), 12000);
+      container.appendChild(particle);
+      setTimeout(() => particle.remove(), 15000);
     }
 
-    setInterval(createParticle, 300);
+    setInterval(createParticle, 250);
   </script>
 </body>
 </html>
