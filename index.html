@@ -42,6 +42,32 @@
         margin: 50px 20px;
         font-size: 16px;
       }
+      <script>
+  const music = document.getElementById('bgMusic');
+  const btn = document.getElementById('toggleButton');
+
+  // Attempt muted autoplay on load
+  document.addEventListener('DOMContentLoaded', () => {
+    music.muted = true;
+    music.play().then(() => {
+      music.muted = false;
+    }).catch(() => {
+      console.log("Autoplay blocked. Tap to start.");
+      btn.textContent = "Play Music"; // reset text
+    });
+  });
+
+  // Play/pause toggle
+  btn.addEventListener('click', () => {
+    if (music.paused) {
+      music.play();
+      btn.textContent = "Pause Music";
+    } else {
+      music.pause();
+      btn.textContent = "Play Music";
+    }
+  });
+</script>
 
       .controls {
         font-size: 14px;
