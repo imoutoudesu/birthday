@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Happy Birthday!</title>
   <style>
     body {
       font-family: 'Georgia', serif;
       background: #cce7ff;
       margin: 0;
-      padding: 20px;
-      overflow-x: hidden;
+      padding: 0;
     }
 
     .letter {
@@ -18,114 +18,79 @@
       border-radius: 15px;
       max-width: 600px;
       margin: 80px auto;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
       line-height: 1.8;
       font-size: 18px;
-      position: relative;
-      z-index: 2;
     }
 
-    .particles {
+    .controls {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      z-index: 1;
-      overflow: hidden;
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999;
+      background: rgba(255,255,255,0.85);
+      padding: 10px 15px;
+      border-radius: 12px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.2);
+      font-weight: bold;
+      cursor: pointer;
     }
 
-    .particle {
-      position: absolute;
-      background-size: contain;
-      background-repeat: no-repeat;
-      animation: fall 10s linear infinite;
-      opacity: 0.8;
-    }
-
-    @keyframes fall {
-      0% {
-        transform: translateY(-10vh) rotate(0deg);
-        opacity: 1;
+    @media (max-width: 600px) {
+      .letter {
+        margin: 50px 20px;
+        font-size: 16px;
       }
-      100% {
-        transform: translateY(110vh) rotate(360deg);
-        opacity: 0;
+
+      .controls {
+        font-size: 14px;
+        padding: 8px 12px;
       }
     }
   </style>
 </head>
 <body>
-  <!-- 🌸❤️ Floating particles -->
-  <div class="particles" id="particles"></div>
 
-  <!-- 💌 Letter -->
-  <div class="letter">
-    <p>happy birthday cayangggg🤍</p>
-    <p>
-      may this year bring you closer to everything your heart truly longs for.  
-      i hope your wishes come true, your days feel lighter, and you stay wrapped in blessings only heaven could write.  
-      biar apapun yang lagi kamu usahakan, sejalan dengan rencana Tuhan buat kamu yaa..
-    </p>
-    <p>
-      thank you my sweethearttt, for everything. you deserve every good things in this world.  
-      im sorry i cannot do something special for you, semoga kita bisa dipertemukan di kesempatan berikutnya~
-    </p>
-    <p>
-      keep glowing, keep growing, the world is better with you in it.  
-      semoga kamu selalu diberikan kesehatan, keamanan, dan kebahagiaan.  
-      ur smile, ur laugh, ur voice, ur cheekz kinda cute i want to protecc it, hihihi.  
-      if u need something, u can call me, as always 🤍
-    </p>
-    <p>
-      sekali lagiii selamat ulang tahunn, sayangg. i love you 💗
-    </p>
-    <p style="text-align: right; font-style: italic;">
-      from ur cutest girl :3
-    </p>
-  </div>
+  <div class="controls" id="toggleButton">Pause Music</div>
 
-  <!-- 🎵 Background music (autoplay attempt) -->
-  <audio id="bgm" autoplay loop muted>
+  <audio id="bgMusic" autoplay loop>
     <source src="Yuika_Ren_-_Sukidakara_(musmore.com).mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
   </audio>
 
+  <div class="letter">
+    <p>happy birthday cayangggg🫶🏻</p>
+    <p>may this year bring you closer to everything your heart truly longs for...</p>
+    <p>thank you my sweethearttt, for everything...</p>
+    <p>keep glowing, keep growing...</p>
+    <p>sekali lagiii selamat ulang tahunn, sayangg. i love you 💗</p>
+    <p><em>from ur cutest girl :3</em></p>
+  </div>
+
   <script>
-    // Try to play the music
-    const audio = document.getElementById("bgm");
-    window.addEventListener("DOMContentLoaded", () => {
-      audio.muted = false;
-      audio.play().catch(err => console.log("Autoplay failed:", err));
+    const music = document.getElementById('bgMusic');
+    const btn = document.getElementById('toggleButton');
+
+    // For autoplay to work on mobile, try to play with muted first
+    document.addEventListener('DOMContentLoaded', () => {
+      music.muted = true;
+      music.play().then(() => {
+        music.muted = false;
+      }).catch((e) => {
+        console.log("Autoplay may be blocked. User interaction needed.");
+      });
     });
 
-    // 🎴 Sakura + heart particle animation
-    const container = document.getElementById("particles");
-
-    const images = [
-      "https://i.imgur.com/Lr5YVXt.png", // sakura
-      "https://i.imgur.com/zvWTUVu.png"  // heart
-    ];
-
-    function createParticle() {
-      const particle = document.createElement("div");
-      particle.className = "particle";
-
-      // Pick image randomly
-      const img = images[Math.floor(Math.random() * images.length)];
-      particle.style.backgroundImage = `url('${img}')`;
-
-      const size = Math.random() * 20 + 20;
-      particle.style.width = `${size}px`;
-      particle.style.height = `${size}px`;
-      particle.style.left = `${Math.random() * 100}vw`;
-      particle.style.animationDuration = `${6 + Math.random() * 5}s`;
-
-      container.appendChild(particle);
-      setTimeout(() => particle.remove(), 15000);
-    }
-
-    setInterval(createParticle, 250);
+    btn.addEventListener('click', () => {
+      if (music.paused) {
+        music.play();
+        btn.textContent = 'Pause Music';
+      } else {
+        music.pause();
+        btn.textContent = 'Play Music';
+      }
+    });
   </script>
 </body>
 </html>
