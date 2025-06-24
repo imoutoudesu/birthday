@@ -5,84 +5,140 @@
   <title>Happy Birthday!</title>
   <style>
     body {
-      background-color: #cceeff;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #333;
-      text-align: center;
-      padding: 30px;
+      font-family: 'Georgia', serif;
+      background: #cce7ff;
+      margin: 0;
+      padding: 20px;
+      overflow: hidden;
     }
 
     .letter {
       background: white;
-      color: #333;
       padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-      max-width: 700px;
-      margin: 0 auto 30px auto;
-      white-space: pre-wrap;
-      line-height: 1.6;
+      border-radius: 15px;
+      max-width: 600px;
+      margin: 60px auto;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      line-height: 1.8;
+      font-size: 18px;
     }
 
-    button {
-      background-color: #fff;
-      color: #333;
-      border: 2px solid #333;
-      border-radius: 10px;
-      padding: 10px 20px;
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: url('https://emoji.gg/assets/emoji/1144-hearts-pink.gif') no-repeat center center;
+      background-size: contain;
+      animation: float 6s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    #controls {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+    }
+
+    #playBtn {
       font-size: 16px;
-      font-weight: bold;
+      padding: 10px 20px;
+      border: none;
+      background: #ff77aa;
+      color: white;
+      border-radius: 10px;
       cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #f0f0f0;
     }
   </style>
 </head>
 <body>
-  <h1>happy birthday cayangggg🤍</h1>
+  <div class="hearts" id="hearts"></div>
 
-  <div class="letter">
-    may this year bring you closer to everything your heart truly longs for.  
-    i hope your wishes come true, your days feel lighter, and you stay wrapped in blessings only heaven could write.  
-    biar apapun yang lagi kamu usahakan, sejalan dengan rencana Tuhan buat kamu yaa..
-
-    thank you my sweethearttt, for everything. you deserve every good things in this world.  
-    im sorry i cannot do something special for you, semoga kita bisa dipertemukan di kesempatan berikutnya~
-
-    keep glowing, keep growing, the world is better with you in it.  
-    semoga kamu selalu diberikan kesehatan, keamanan, dan kebahagiaan.  
-    ur smile, ur laugh, ur voice, ur cheekz kinda cute i want to protecc it, hihihi.  
-    if u need something, u can call me, as always 🤍
-
-    sekali lagiii selamat ulang tahunn, sayangg. i love you 💗
-
-    <br><br><i>from ur cutest girl :3</i>
+  <div id="controls">
+    <button id="playBtn">Pause Music ⏸️</button>
   </div>
 
-  <audio id="bgMusic" loop>
-    <source src="sukidakara_yuika.mp3" type="audio/mpeg">
+  <div class="letter">
+    <p>happy birthday cayangggg🤍</p>
+    <p>
+      may this year bring you closer to everything your heart truly longs for.
+      I hope your wishes come true, your days feel lighter, and you stay wrapped in blessings only heaven could write.
+      biar apapun yang lagi kamu usahakan, sejalan dengan rencana Tuhan buat kamu yaa..
+    </p>
+    <p>
+      thank you my sweethearttt, for everything. you deserve every good things in this world.
+      im sorry i cannot do something special for you, semoga kita bisa dipertemukan di kesempatan berikutnya~
+    </p>
+    <p>
+      keep glowing, keep growing, the world is better with you in it.
+      semoga kamu selalu diberikan kesehatan, keamanan, dan kebahagiaan.
+      ur smile, ur laugh, ur voice, ur cheekz kinda cute i want to protecc it, hihihi.
+      if u need something, u can call me, as always 🤍
+    </p>
+    <p>
+      sekali lagiii selamat ulang tahunn, sayangg. i love you 💗
+    </p>
+    <p style="text-align: right; font-style: italic;">
+      from ur cutest girl :3
+    </p>
+  </div>
+
+  <audio id="bgm" autoplay loop>
+    <source src="Yuika_Ren_-_Sukidakara_(musmore.com).mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
 
-  <button onclick="toggleMusic()">▶️ Play Music</button>
-
   <script>
-    const audio = document.getElementById("bgMusic");
-    const button = document.querySelector("button");
-    let playing = false;
+    // Floating hearts
+    const heartsContainer = document.getElementById('hearts');
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = 5 + Math.random() * 3 + 's';
+      heartsContainer.appendChild(heart);
+      setTimeout(() => heart.remove(), 8000);
+    }
+    setInterval(createHeart, 500);
 
-    function toggleMusic() {
-      if (playing) {
+    // Music controls
+    const audio = document.getElementById("bgm");
+    const playBtn = document.getElementById("playBtn");
+    let isPlaying = true;
+
+    playBtn.addEventListener("click", () => {
+      if (isPlaying) {
         audio.pause();
-        button.textContent = "▶️ Play Music";
+        playBtn.textContent = "Play Music ▶️";
       } else {
         audio.play();
-        button.textContent = "⏸ Pause Music";
+        playBtn.textContent = "Pause Music ⏸️";
       }
-      playing = !playing;
-    }
+      isPlaying = !isPlaying;
+    });
   </script>
 </body>
 </html>
