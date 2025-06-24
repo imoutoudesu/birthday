@@ -1,64 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>Happy Birthday!</title>
   <style>
     body {
-      font-family: 'Georgia', serif;
-      background-color: #d0eaff;
-      color: #333;
+      background-color: #87CEFA; /* Light sky blue */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+      text-align: center;
       padding: 40px 20px;
-      max-width: 700px;
-      margin: auto;
-      line-height: 1.8;
     }
+
     .letter {
       background: white;
+      color: #003366;
       padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      max-width: 600px;
+      margin: 0 auto;
+      white-space: pre-wrap;
     }
-    .signature {
-      margin-top: 40px;
-      text-align: right;
-      font-style: italic;
+
+    button {
+      margin-top: 30px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      background-color: white;
+      color: #003366;
+      font-weight: bold;
+      cursor: pointer;
     }
-    audio {
-      display: none;
+
+    button:hover {
+      background-color: #e0e0e0;
     }
   </style>
 </head>
 <body>
-   <audio autoplay loop>
-  <source src="sukidakara_yuika.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
-
+  <h1>Happy Birthday Cayangggg🫶🏻</h1>
 
   <div class="letter">
-    <p>happy birthday cayangggg🫶🏻</p>
+    may this year bring you closer to everything your heart truly longs for.  
+    i hope your wishes come true, your days feel lighter, and you stay wrapped in blessings only heaven could write.  
+    biar apapun yang lagi kamu usahakan, sejalan dengan rencana Tuhan buat kamu yaa..
 
-    <p>
-      may this year bring you closer to everything your heart truly longs for. i hope your wishes come true, your days feel lighter, and you stay wrapped in blessings only heaven could write. biar apapun yang lagi kamu usahakan, sejalan dengan rencana Tuhan buat kamu yaa..
-    </p>
+    thank you my sweethearttt, for everything. you deserve every good things in this world.  
+    im sorry i cannot do something special for you, semoga kita bisa dipertemukan di kesempatan berikutnya~
 
-    <p>
-      thank you my sweethearttt, for everything. you deserve every good things in this world. im sorry i cannot do something special for you, semoga kita bisa dipertemukan di kesempatan berikutnya~
-    </p>
+    keep glowing, keep growing, the world is better with you in it.  
+    semoga kamu selalu diberikan kesehatan, keamanan, dan kebahagiaan.  
+    ur smile, ur laugh, ur voice, ur cheekz kinda cute i want to protecc it, hihihi.  
+    if u need something, u can call me, as always🫶🏻
 
-    <p>
-      keep glowing, keep growing, the world is better with you in it. semoga kamu selalu diberikan kesehatan, keamanan, dan kebahagiaan. ur smile, ur laugh, ur voice, ur cheekz kinda cute i want to protecc it, hihihi. if u need something, u can call me, as always🫶🏻
-    </p>
+    sekali lagiii selamat ulang tahunn, sayangg.  
+    i love you 🩷
 
-    <p>
-      sekali lagiii selamat ulang tahunn, sayangg. i love you 🩷
-    </p>
-
-    <div class="signature">
-      from ur cutest girl :3
-    </div>
+    from ur cutest girl :3
   </div>
+
+  <audio id="bgMusic" loop>
+    <source src="sukidakara_yuika.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <button onclick="toggleMusic()">▶️ Play Music</button>
+
+  <script>
+    const audio = document.getElementById('bgMusic');
+    const button = document.querySelector('button');
+    let isPlaying = false;
+
+    function toggleMusic() {
+      if (isPlaying) {
+        audio.pause();
+        button.textContent = '▶️ Play Music';
+      } else {
+        audio.play();
+        button.textContent = '⏸ Pause Music';
+      }
+      isPlaying = !isPlaying;
+    }
+  </script>
 </body>
 </html>
