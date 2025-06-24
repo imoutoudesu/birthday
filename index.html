@@ -54,11 +54,27 @@
         opacity: 0;
       }
     }
+
+    .controls {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      z-index: 3;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 10px 15px;
+      border-radius: 12px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      font-weight: bold;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
-  <!-- 🌸❤️🎈 Floating particles -->
+  <!-- 🎈❤️ Particles -->
   <div class="particles" id="particles"></div>
+
+  <!-- 🎵 Play/Pause Button -->
+  <div class="controls" id="toggleButton">Pause Music</div>
 
   <!-- 💌 Letter -->
   <div class="letter">
@@ -86,25 +102,36 @@
     </p>
   </div>
 
-  <!-- 🎵 Background music -->
-  <audio id="bgm" autoplay loop muted>
+  <!-- 🎵 Music -->
+  <audio id="bgm" autoplay loop>
     <source src="Yuika_Ren_-_Sukidakara_(musmore.com).mp3" type="audio/mpeg">
   </audio>
 
-  <!-- ✨ JavaScript for animation & audio -->
   <script>
-    // Try to unmute and play audio
+    // 🎵 Music Controls
     const audio = document.getElementById("bgm");
+    const toggleButton = document.getElementById("toggleButton");
+
     window.addEventListener("DOMContentLoaded", () => {
-      audio.muted = false;
-      audio.play().catch(err => console.log("Autoplay failed:", err));
+      audio.play().catch(err => {
+        console.log("Autoplay blocked:", err);
+        toggleButton.innerText = "Play Music";
+      });
     });
 
-    // 🎴 Sakura + heart + balloon particle animation
-    const container = document.getElementById("particles");
+    toggleButton.addEventListener("click", () => {
+      if (audio.paused) {
+        audio.play();
+        toggleButton.innerText = "Pause Music";
+      } else {
+        audio.pause();
+        toggleButton.innerText = "Play Music";
+      }
+    });
 
+    // ❤️🎈 Particles
+    const container = document.getElementById("particles");
     const images = [
-      "https://i.imgur.com/Lr5YVXt.png", // sakura
       "https://i.imgur.com/zvWTUVu.png", // heart
       "https://i.imgur.com/r7m0aL1.png"  // balloon
     ];
@@ -120,7 +147,7 @@
       particle.style.width = `${size}px`;
       particle.style.height = `${size}px`;
       particle.style.left = `${Math.random() * 100}vw`;
-      particle.style.animationDuration = `${6 + Math.random() * 6}s`;
+      particle.style.animationDuration = `${6 + Math.random() * 5}s`;
 
       container.appendChild(particle);
       setTimeout(() => particle.remove(), 15000);
