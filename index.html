@@ -57,7 +57,7 @@
   </style>
 </head>
 <body>
-  <!-- 🌸❤️ Floating particles -->
+  <!-- 🌸❤️🎈 Floating particles -->
   <div class="particles" id="particles"></div>
 
   <!-- 💌 Letter -->
@@ -86,46 +86,47 @@
     </p>
   </div>
 
-  <!-- 🎵 Background music (autoplay attempt) -->
+  <!-- 🎵 Background music -->
   <audio id="bgm" autoplay loop muted>
     <source src="Yuika_Ren_-_Sukidakara_(musmore.com).mp3" type="audio/mpeg">
   </audio>
 
+  <!-- ✨ JavaScript for animation & audio -->
   <script>
-    // Try to play the music
+    // Try to unmute and play audio
     const audio = document.getElementById("bgm");
     window.addEventListener("DOMContentLoaded", () => {
       audio.muted = false;
       audio.play().catch(err => console.log("Autoplay failed:", err));
     });
 
-    // 🎴 Sakura + heart particle animation
+    // 🎴 Sakura + heart + balloon particle animation
     const container = document.getElementById("particles");
 
     const images = [
       "https://i.imgur.com/Lr5YVXt.png", // sakura
-      "https://i.imgur.com/zvWTUVu.png"  // heart
+      "https://i.imgur.com/zvWTUVu.png", // heart
+      "https://i.imgur.com/r7m0aL1.png"  // balloon
     ];
 
     function createParticle() {
       const particle = document.createElement("div");
       particle.className = "particle";
 
-      // Pick image randomly
       const img = images[Math.floor(Math.random() * images.length)];
       particle.style.backgroundImage = `url('${img}')`;
 
-      const size = Math.random() * 20 + 20;
+      const size = Math.random() * 20 + 30;
       particle.style.width = `${size}px`;
       particle.style.height = `${size}px`;
       particle.style.left = `${Math.random() * 100}vw`;
-      particle.style.animationDuration = `${6 + Math.random() * 5}s`;
+      particle.style.animationDuration = `${6 + Math.random() * 6}s`;
 
       container.appendChild(particle);
       setTimeout(() => particle.remove(), 15000);
     }
 
-    setInterval(createParticle, 250);
+    setInterval(createParticle, 300);
   </script>
 </body>
 </html>
