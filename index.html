@@ -17,7 +17,7 @@
       padding: 30px;
       border-radius: 15px;
       max-width: 600px;
-      margin: 80px auto;
+      margin: 100px auto 40px;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
       line-height: 1.8;
       font-size: 18px;
@@ -25,72 +25,77 @@
 
     .controls {
       position: fixed;
-      top: 15px;
+      top: 20px;
       left: 50%;
       transform: translateX(-50%);
-      z-index: 999;
-      background: rgba(255,255,255,0.85);
-      padding: 10px 15px;
-      border-radius: 12px;
+      z-index: 1000;
+      background: rgba(255,255,255,0.9);
+      padding: 10px 20px;
+      border-radius: 20px;
       box-shadow: 0 0 5px rgba(0,0,0,0.2);
       font-weight: bold;
       cursor: pointer;
+      user-select: none;
     }
 
     @media (max-width: 600px) {
       .letter {
-        margin: 50px 20px;
+        margin: 80px 15px 40px;
         font-size: 16px;
-      }
-
-      .controls {
-        font-size: 14px;
-        padding: 8px 12px;
       }
     }
   </style>
 </head>
 <body>
 
+  <!-- 🔊 Music Controls -->
   <div class="controls" id="toggleButton">Pause Music</div>
 
+  <!-- 🔊 Audio -->
   <audio id="bgMusic" autoplay loop>
     <source src="Yuika_Ren_-_Sukidakara_(musmore.com).mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
 
+  <!-- 💌 Message -->
   <div class="letter">
     <p>happy birthday cayangggg🫶🏻</p>
-    <p>may this year bring you closer to everything your heart truly longs for...</p>
-    <p>thank you my sweethearttt, for everything...</p>
-    <p>keep glowing, keep growing...</p>
-    <p>sekali lagiii selamat ulang tahunn, sayangg. i love you 💗</p>
-    <p><em>from ur cutest girl :3</em></p>
+    <p>may this year bring you closer to everything your heart truly longs for. i hope your wishes come true, your days feel lighter, and you stay wrapped in blessings only heaven could write. biar apapun yang lagi kamu usahakan, sejalan dengan rencana Tuhan buat kamu yaa..</p>
+    <p>thank you my sweethearttt, for everything. you deserve every good things in this world. im sorry i cannot do something special for you, semoga kita bisa dipertemukan di kesempatan berikutnya~</p>
+    <p>keep glowing, keep growing, the world is better with you in it. semoga kamu selalu diberikan kesehatan, keamanan, dan kebahagiaan. ur smile, ur laugh, ur voice, ur cheekz kinda cute i want to protecc it, hihihi. if u need something, u can call me, as always <3 </p>
+    <p>sekali lagiii selamat ulang tahunn, sayangg. i love you 🩷</p>
+    <p style="text-align:right;"><em>from ur cutest girl :3</em></p>
   </div>
 
+  <!-- 🔁 Script -->
   <script>
-    const music = document.getElementById('bgMusic');
-    const btn = document.getElementById('toggleButton');
+    const audio = document.getElementById("bgMusic");
+    const button = document.getElementById("toggleButton");
 
-    // For autoplay to work on mobile, try to play with muted first
-    document.addEventListener('DOMContentLoaded', () => {
-      music.muted = true;
-      music.play().then(() => {
-        music.muted = false;
-      }).catch((e) => {
-        console.log("Autoplay may be blocked. User interaction needed.");
-      });
+    // Try autoplay on load
+    document.addEventListener("DOMContentLoaded", () => {
+      const tryPlay = () => {
+        audio.muted = true;
+        audio.play().then(() => {
+          audio.muted = false;
+        }).catch(() => {
+          console.log("Autoplay blocked. Tap to start.");
+        });
+      };
+      tryPlay();
     });
 
-    btn.addEventListener('click', () => {
-      if (music.paused) {
-        music.play();
-        btn.textContent = 'Pause Music';
+    // Toggle Play/Pause
+    button.addEventListener("click", () => {
+      if (audio.paused) {
+        audio.play();
+        button.textContent = "Pause Music";
       } else {
-        music.pause();
-        btn.textContent = 'Play Music';
+        audio.pause();
+        button.textContent = "Play Music";
       }
     });
   </script>
+
 </body>
 </html>
