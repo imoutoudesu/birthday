@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Happy Birthday!</title>
   <style>
     body {
@@ -9,7 +9,6 @@
       background: #cce7ff;
       margin: 0;
       padding: 20px;
-      overflow: hidden;
     }
 
     .letter {
@@ -17,10 +16,12 @@
       padding: 30px;
       border-radius: 15px;
       max-width: 600px;
-      margin: 60px auto;
+      margin: 80px auto;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
       line-height: 1.8;
       font-size: 18px;
+      position: relative;
+      z-index: 2;
     }
 
     .hearts {
@@ -30,15 +31,14 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
-      overflow: hidden;
       z-index: 1;
     }
 
     .heart {
       position: absolute;
-      width: 20px;
-      height: 20px;
-      background: url('https://emoji.gg/assets/emoji/1144-hearts-pink.gif') no-repeat center center;
+      width: 24px;
+      height: 24px;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/2/27/Pink_heart_emoji.png') no-repeat center center;
       background-size: contain;
       animation: float 6s linear infinite;
       opacity: 0.8;
@@ -72,30 +72,37 @@
       border-radius: 10px;
       cursor: pointer;
     }
+
+    #playBtn:hover {
+      background-color: #ff5c99;
+    }
   </style>
 </head>
 <body>
+  <!-- ❤️ Floating Hearts -->
   <div class="hearts" id="hearts"></div>
 
+  <!-- 🔊 Music Control -->
   <div id="controls">
-    <button id="playBtn">Pause Music ⏸️</button>
+    <button id="playBtn">⏸ Pause Music</button>
   </div>
 
+  <!-- 💌 Letter -->
   <div class="letter">
     <p>happy birthday cayangggg🤍</p>
     <p>
-      may this year bring you closer to everything your heart truly longs for.
-      I hope your wishes come true, your days feel lighter, and you stay wrapped in blessings only heaven could write.
+      may this year bring you closer to everything your heart truly longs for.  
+      i hope your wishes come true, your days feel lighter, and you stay wrapped in blessings only heaven could write.  
       biar apapun yang lagi kamu usahakan, sejalan dengan rencana Tuhan buat kamu yaa..
     </p>
     <p>
-      thank you my sweethearttt, for everything. you deserve every good things in this world.
+      thank you my sweethearttt, for everything. you deserve every good things in this world.  
       im sorry i cannot do something special for you, semoga kita bisa dipertemukan di kesempatan berikutnya~
     </p>
     <p>
-      keep glowing, keep growing, the world is better with you in it.
-      semoga kamu selalu diberikan kesehatan, keamanan, dan kebahagiaan.
-      ur smile, ur laugh, ur voice, ur cheekz kinda cute i want to protecc it, hihihi.
+      keep glowing, keep growing, the world is better with you in it.  
+      semoga kamu selalu diberikan kesehatan, keamanan, dan kebahagiaan.  
+      ur smile, ur laugh, ur voice, ur cheekz kinda cute i want to protecc it, hihihi.  
       if u need something, u can call me, as always 🤍
     </p>
     <p>
@@ -106,11 +113,13 @@
     </p>
   </div>
 
+  <!-- 🎵 Background Music -->
   <audio id="bgm" autoplay loop>
     <source src="Yuika_Ren_-_Sukidakara_(musmore.com).mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
 
+  <!-- 💫 JS for music + hearts -->
   <script>
     // Floating hearts
     const heartsContainer = document.getElementById('hearts');
@@ -122,9 +131,9 @@
       heartsContainer.appendChild(heart);
       setTimeout(() => heart.remove(), 8000);
     }
-    setInterval(createHeart, 500);
+    setInterval(createHeart, 400);
 
-    // Music controls
+    // Music control
     const audio = document.getElementById("bgm");
     const playBtn = document.getElementById("playBtn");
     let isPlaying = true;
@@ -132,10 +141,10 @@
     playBtn.addEventListener("click", () => {
       if (isPlaying) {
         audio.pause();
-        playBtn.textContent = "Play Music ▶️";
+        playBtn.textContent = "▶️ Play Music";
       } else {
         audio.play();
-        playBtn.textContent = "Pause Music ⏸️";
+        playBtn.textContent = "⏸ Pause Music";
       }
       isPlaying = !isPlaying;
     });
