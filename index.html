@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Happy Birthday!</title>
   <style>
     body {
@@ -11,7 +11,6 @@
       padding: 20px;
       overflow-x: hidden;
     }
-
     .letter {
       background: white;
       padding: 30px;
@@ -24,7 +23,6 @@
       position: relative;
       z-index: 2;
     }
-
     .particles {
       position: fixed;
       top: 0;
@@ -35,15 +33,13 @@
       z-index: 1;
       overflow: hidden;
     }
-
     .particle {
       position: absolute;
       background-size: contain;
       background-repeat: no-repeat;
       animation: fall 10s linear infinite;
-      opacity: 0.8;
+      opacity: 0.9;
     }
-
     @keyframes fall {
       0% {
         transform: translateY(-10vh) rotate(0deg);
@@ -54,67 +50,41 @@
         opacity: 0;
       }
     }
-
     .controls {
       position: fixed;
       top: 15px;
       right: 15px;
       z-index: 3;
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(255,255,255,0.8);
       padding: 10px 15px;
       border-radius: 12px;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 5px rgba(0,0,0,0.2);
       font-weight: bold;
       cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <!-- 🎈❤️ Particles -->
   <div class="particles" id="particles"></div>
-
-  <!-- 🎵 Play/Pause Button -->
   <div class="controls" id="toggleButton">Pause Music</div>
-
-  <!-- 💌 Letter -->
   <div class="letter">
+    <!-- Your heartfelt message here -->
     <p>happy birthday cayangggg🤍</p>
-    <p>
-      may this year bring you closer to everything your heart truly longs for.  
-      i hope your wishes come true, your days feel lighter, and you stay wrapped in blessings only heaven could write.  
-      biar apapun yang lagi kamu usahakan, sejalan dengan rencana Tuhan buat kamu yaa..
-    </p>
-    <p>
-      thank you my sweethearttt, for everything. you deserve every good things in this world.  
-      im sorry i cannot do something special for you, semoga kita bisa dipertemukan di kesempatan berikutnya~
-    </p>
-    <p>
-      keep glowing, keep growing, the world is better with you in it.  
-      semoga kamu selalu diberikan kesehatan, keamanan, dan kebahagiaan.  
-      ur smile, ur laugh, ur voice, ur cheekz kinda cute i want to protecc it, hihihi.  
-      if u need something, u can call me, as always 🤍
-    </p>
-    <p>
-      sekali lagiii selamat ulang tahunn, sayangg. i love you 💗
-    </p>
-    <p style="text-align: right; font-style: italic;">
-      from ur cutest girl :3
-    </p>
+    <p>may this year bring you closer…</p>
+    <!-- etc. -->
+    <p style="text-align: right; font-style: italic;">from ur cutest girl :3</p>
   </div>
 
-  <!-- 🎵 Music -->
   <audio id="bgm" autoplay loop>
     <source src="Yuika_Ren_-_Sukidakara_(musmore.com).mp3" type="audio/mpeg">
   </audio>
 
   <script>
-    // 🎵 Music Controls
     const audio = document.getElementById("bgm");
     const toggleButton = document.getElementById("toggleButton");
 
     window.addEventListener("DOMContentLoaded", () => {
       audio.play().catch(err => {
-        console.log("Autoplay blocked:", err);
         toggleButton.innerText = "Play Music";
       });
     });
@@ -129,29 +99,23 @@
       }
     });
 
-    // ❤️🎈 Particles
     const container = document.getElementById("particles");
-   const images = [
-  "https://i.imgur.com/NzBxVZz.png", // heart
-  "https://i.imgur.com/ftrr3pD.png"  // balloon
-];
-
+    const images = [
+      "https://i.imgur.com/NzBxVZz.png",    // heart
+      "https://i.imgur.com/ftrr3pD.png"     // balloon
+    ];
 
     function createParticle() {
-      const particle = document.createElement("div");
-      particle.className = "particle";
-
+      const p = document.createElement("div");
+      p.className = "particle";
       const img = images[Math.floor(Math.random() * images.length)];
-      particle.style.backgroundImage = `url('${img}')`;
-
-      const size = Math.random() * 20 + 30;
-      particle.style.width = `${size}px`;
-      particle.style.height = `${size}px`;
-      particle.style.left = `${Math.random() * 100}vw`;
-      particle.style.animationDuration = `${6 + Math.random() * 5}s`;
-
-      container.appendChild(particle);
-      setTimeout(() => particle.remove(), 15000);
+      p.style.backgroundImage = `url('${img}')`;
+      const size = 25 + Math.random() * 30;
+      p.style.width = p.style.height = `${size}px`;
+      p.style.left = `${Math.random() * 100}vw`;
+      p.style.animationDuration = `${6 + Math.random() * 5}s`;
+      container.appendChild(p);
+      setTimeout(() => p.remove(), 12000);
     }
 
     setInterval(createParticle, 300);
