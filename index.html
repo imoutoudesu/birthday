@@ -76,15 +76,19 @@
     const music = document.getElementById('bgMusic');
     const btn = document.getElementById('toggleButton');
 
+    // Try autoplay with muted trick
     document.addEventListener('DOMContentLoaded', () => {
       music.muted = true;
       music.play().then(() => {
         music.muted = false;
+        music.volume = 0.5; // optional: set volume
+        btn.textContent = 'Pause Music';
       }).catch(() => {
-        console.log("Autoplay might be blocked until interaction.");
+        console.log("🔇 Autoplay blocked by browser. User must tap to start.");
       });
     });
 
+    // Toggle music playback
     btn.addEventListener('click', () => {
       if (music.paused) {
         music.play();
